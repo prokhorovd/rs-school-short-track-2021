@@ -12,8 +12,9 @@
  * For 00-1B-63-84-45-E6, the output should be true.
  *
  */
-function isMAC48Address(/* n */) {
-  throw new Error('Not implemented');
+function isMAC48Address(inputString) {
+  // return true if inputString is 17 chars long and contains only [a-fA-F0-9-]
+  return Boolean(inputString.match(/^[a-fA-F0-9-]{17}$/g));
 }
 
 module.exports = isMAC48Address;
