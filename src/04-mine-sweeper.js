@@ -24,31 +24,30 @@
 function minesweeper(matrix) {
   const rows = matrix.length;
   const columns = matrix[0].length;
-  // let's create a matrix for a result
+  // create matrix for a result
   const result = [];
+  // fill it with zeroes
   const resultRow = [];
   for (let i = 0; i < columns; i++) resultRow.push(0);
   for (let i = 0; i < rows; i++) result.push(resultRow.slice());
-  // console.log(`result matrix is ${result}`);
-  // console.log(`result 1st row is ${result[0]}`);
-
   // let's find some mines and mark them
+  // iterate through input-matrix
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
+      // if mine is found
       if (matrix[i][j] === true) {
-        // console.log(`mine found at ${i}-${j} position`);
+        // we're gonna write to result-matrix to previous, current and following row
         for (let row = i - 1; row <= i + 1; row++) {
-          // console.log(`checking row ${row}`);
+          // check if row exists
           if (row >= 0 && row < rows) {
-            // console.log('row is available');
-            // console.log("non existing row");
+            // we're gonna write to result-matrix to previous, current and following column
             for (let column = j - 1; column <= j + 1; column++) {
-              // console.log(`checking column ${column}`);
+              // check if column exist
               if (column >= 0 && column < columns) {
+                // make sure cell doesn't contain mine
                 if ((row === i && column === j) === false) {
-                  // console.log('column is available');
+                  // mark that there's mine nearby
                   result[row][column] += 1;
-                  // console.log(`+=1 to [${row}][${column}]`);
                 }
               }
             }
@@ -57,10 +56,7 @@ function minesweeper(matrix) {
       }
     }
   }
-  // let's print the result
-  // for (let i = 0; i < result.length; i++) {
-  //   console.log(result[i]);
-  // }
+  // return result matrix
   return result;
 }
 
