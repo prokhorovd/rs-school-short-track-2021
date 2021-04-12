@@ -11,16 +11,59 @@
  *
  */
 class Stack {
-  push(/* element */) {
-    throw new Error('Not implemented');
+  constructor(value) {
+    if (value === undefined) {
+      this.value = null;
+    } else {
+      this.value = value;
+    }
+    this.next = null;
+  }
+
+  push(element) {
+    // throw new Error('Not implemented');
+    if (!this.value) {
+      this.value = element;
+    } else if (!this.next) {
+      this.next = new Stack(element);
+    } else {
+      let currentElement = this.next;
+      while (currentElement.next) {
+        currentElement = currentElement.next;
+      }
+      currentElement.next = new Stack(element);
+    }
   }
 
   pop() {
-    throw new Error('Not implemented');
+    if (!this.value) {
+      return undefined;
+    } if (!this.next) {
+      const result = this.value;
+      this.value = null;
+      return result;
+    }
+    let currentElement = this.next;
+    let previousElement = this;
+    while (currentElement.next) {
+      previousElement = currentElement;
+      currentElement = currentElement.next;
+    }
+    previousElement.next = null;
+    return currentElement.value;
   }
 
   peek() {
-    throw new Error('Not implemented');
+    if (!this.value) {
+      return undefined;
+    } if (!this.next) {
+      return this.value;
+    }
+    let currentElement = this.next;
+    while (currentElement.next) {
+      currentElement = currentElement.next;
+    }
+    return currentElement.value;
   }
 }
 
